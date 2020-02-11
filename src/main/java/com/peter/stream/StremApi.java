@@ -49,7 +49,7 @@ public class StremApi {
 
 	}
 
-	List<Employee> employeeList = Arrays.asList(
+	public static List<Employee> employeeList = Arrays.asList(
 			new Employee(101,"张三",18,5000.55),
 			new Employee(101,"李四",20,8888.88),
 			new Employee(101,"王五",25,6666.66),
