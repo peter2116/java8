@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  *
  * 3. 终止操作(终端操作)
  */
-public class StremApi {
+public class StremApi2 {
 
 	//1.创建Stream
 	@Test
@@ -50,15 +50,44 @@ public class StremApi {
 	}
 
 	public static List<Employee> employeeList = Arrays.asList(
-			new Employee(101,"A",18,5000.55),
-			new Employee(101,"D",20,8888.88),
-			new Employee(101,"F",25,6666.66),
-			new Employee(101,"Z",30,7777.77),
-			new Employee(101,"H",35,4444.44),
-			new Employee(101,"M",50,3333.33),
-			new Employee(101,"G",55,10000.00),
-			new Employee(101,"~",55,10000.00)
+			new Employee(1,"1",0,5000.55),
+			new Employee(1,"1",0,8888.88),
+			new Employee(2,"2",1,6666.66),
+			new Employee(2,"2",1,7777.77),
+			new Employee(3,"3",3,4444.44),
+			new Employee(3,"3",4,3333.33),
+			new Employee(4,"4",0,10000.00),
+			new Employee(4,"4",2,10000.00)
 	);
+
+
+	@Test
+	public void filter() {
+		Set<String> set = new HashSet<>(); //去重acc + bankNo + branchNo
+		Set<String> set2 = new HashSet<>(); //去重acc + bankNo
+		employeeList.forEach(e -> {
+			String acc = e.getName();
+			String bankNo = e.getName();
+			String brNo = e.getAge() + "";
+			String all = acc + "|" + bankNo + "|" + brNo;
+			String pair = acc + "|" + bankNo;
+			if(!"0".equals(brNo)) {  //有分支行的进入
+				if(!set.contains(all)) {
+					set.add(all);
+					set2.add(pair);
+					if(set.contains(pair)) {  //没有分支行的出
+						set.remove(pair);
+					}
+				}
+			}else {
+				if(!set.contains(pair) && !set2.contains(pair)) {  //没有
+					set.add(pair);
+				}
+			}
+		});
+
+		System.out.println(set);
+	}
 
 	/**
 	 * 中间操作
